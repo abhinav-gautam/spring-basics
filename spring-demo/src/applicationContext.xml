@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!--Property File -->
+	<context:property-placeholder
+		location="classpath:sports.properties" />
+
+	<!-- Define your beans here -->
+	<!-- Define the dependency -->
+	<bean id="coachFortuneService"
+		class="com.abhinavgautam.springdemo.CoachFortuneService">
+	</bean>
+
+	<bean id="myCoach"
+		class="com.abhinavgautam.springdemo.BaseballCoach">
+		<!-- Set up constructor injection -->
+		<constructor-arg ref="coachFortuneService" />
+	</bean>
+	<bean id="secondCoach"
+		class="com.abhinavgautam.springdemo.CricketCoach">
+		<!-- Setter injection -->
+		<property name="fortuneService" ref="coachFortuneService" />
+		<!-- Literal value injection -->
+		<property name="email" value="${cricketCoach.email}" />
+		<property name="team" value="${cricketCoach.team}" />
+	</bean>
+</beans>
+
+
+
+
+
